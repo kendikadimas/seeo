@@ -1,403 +1,244 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SPK Pemilihan Paket Internet dengan Metode SAW</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Soedirman Entrepreneur Engineering Organization</title> 
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        // Konfigurasi Tambahan untuk Tailwind CSS
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Poppins', 'sans-serif'],
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 1s ease-out forwards',
+                        'fade-in-down': 'fadeInDown 1s ease-out forwards',
+                        'float': 'float 6s ease-in-out infinite',
+                        'subtle-pulse': 'subtlePulse 4s infinite ease-in-out',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        fadeInDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-40px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        },
+                        subtlePulse: {
+                           '0%, 100%': { transform: 'scale(1)', opacity: '0.1' },
+                           '50%': { transform: 'scale(1.2)', opacity: '0.15' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        .best-package {
-            background-color: #dbeafe;
-            font-weight: 600;
+        /* CSS untuk Intersection Observer (animasi saat scroll) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
         }
-        .best-package .rank-badge {
-            background-color: #2563eb;
-            color: white;
-        }
-        .custom-package-row {
-            background-color: #fef9c3;
-        }
-        /* Secara default, sembunyikan kolom terakhir (Aksi) */
-        #alternativesTable th:last-child,
-        #alternativesTable td:last-child {
-            display: none;
-        }
-        /* Jika tabel memiliki class 'has-custom-packages', tampilkan kolom terakhir */
-        #alternativesTable.has-custom-packages th:last-child,
-        #alternativesTable.has-custom-packages td:last-child {
-            display: table-cell;
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
-<body class="bg-gradient-to-r from-blue-400 to-indigo-700 font-['Poppins']">
-    <section class="flex flex-col lg:flex-row items-stretch bg-gradient-to-r from-blue-400 to-indigo-700 text-white">
-        <div class="w-full lg:w-1/2 flex flex-col justify-center items-center lg:items-start text-center lg:text-left container mx-auto px-6 py-20 ">
-            <div class="max-w-3xl lg:ml-12 "> 
-                <h1 class="text-3xl sm:text-4xl xl:text-5xl font-bold mb-4">Pilih Paket Internet Terbaik dengan Metode SAW</h1>
-                <p class="text-lg sm:text-xl mb-8">Gunakan alat kami untuk menemukan paket internet yang paling sesuai dengan kebutuhan Anda berdasarkan perbandingan beberapa kriteria.</p>
-                <a href="#calculation-section" class="inline-block bg-white text-blue-600 font-semibold py-3 px-6 rounded-lg shadow-sm hover:bg-gray-200 hover:shadow-md transition duration-300 ease-in-out hover:scale-105">
-                    Mulai Sekarang
+<body class="bg-white" x-data="{ atTop: true }" @scroll.window="atTop = (window.scrollY < 50)">
+
+    <nav x-data="{ open: false }" 
+         :class="{ 'bg-white/80 backdrop-blur-md shadow-md': !atTop, 'bg-transparent': atTop }"
+         class="py-4 px-6 fixed top-0 w-full z-50 transition-all duration-300">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        <div class="flex items-center gap-2">
+            <img src="seeologo.webp" alt="SEEO Logo" class="h-10 w-10 rounded-full">
+            <span :class="{ 'text-gray-900': !atTop, 'text-white': atTop }" class="font-semibold text-lg tracking-tight transition-colors">SEEO</span>
+        </div>
+        <ul class="hidden md:flex items-center gap-6 text-sm font-bold" :class="{ 'text-gray-700': !atTop, 'text-white': atTop }">
+          <li><a href="#home" class="hover:text-indigo-500 transition-colors">Beranda</a></li>
+          <li><a href="structure.html" class="hover:text-indigo-500 transition-colors">Struktur</a></li>
+          <li><a href="activity.html" class="hover:text-indigo-500 transition-colors">Kegiatan</a></li>
+        </ul>
+        <div class="hidden md:flex items-center">
+          <a href="#blaterian" class="bg-yellow-500 hover:bg-yellow-600 text-white text-sm px-6 py-3 rounded-lg font-bold transition shadow-lg hover:shadow-yellow-500/30">
+            Blaterian
+          </a>
+        </div>
+        <button @click="open = !open" class="md:hidden text-2xl focus:outline-none" :class="{ 'text-gray-700': !atTop, 'text-white': atTop }">
+          <span x-show="!open">☰</span>
+          <span x-show="open">✕</span>
+        </button>
+      </div>
+      <div x-show="open" x-transition class="md:hidden mt-4 p-4 border-t border-gray-200 bg-white/95 backdrop-blur-md rounded-lg space-y-3 text-sm font-medium text-gray-700">
+        <a href="#home" class="block px-3 py-2 hover:bg-gray-100 rounded">Beranda</a>
+        <a href="structure.html" class="block px-3 py-2 hover:bg-gray-100 rounded">Struktur</a>
+        <a href="activity.html" class="block px-3 py-2 hover:bg-gray-100 rounded">Kegiatan</a>
+        <hr class="my-2" />
+        <a href="#blaterian" class="block bg-yellow-500 hover:bg-yellow-600 text-white text-center px-4 py-2 rounded-lg font-medium transition">Blaterian</a>
+      </div>
+    </nav>
+
+    <header id="home" class="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 bg-cover bg-center bg-fixed" style="background-image: url('herosection.jpg');"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-indigo-900/80 via-blue-900/60 to-transparent"></div>
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute -top-40 -right-40 w-80 h-80 bg-blue-500 rounded-full animate-subtle-pulse blur-3xl"></div>
+            <div class="absolute -bottom-40 -left-40 w-96 h-96 bg-cyan-500 rounded-full animate-subtle-pulse blur-3xl" style="animation-delay: 1.5s;"></div>
+        </div>
+        <div class="relative z-10 max-w-5xl mx-auto px-6 text-center text-white">
+            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-black mb-6 leading-tight animate-fade-in-down" style="text-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+                Soedirman Entrepreneur Engineering Organization
+            </h1>
+            <p class="text-xl sm:text-2xl text-white/90 mb-10 max-w-3xl mx-auto leading-relaxed animate-fade-in-up" style="animation-delay: 0.3s;">
+              Set Up Your Mind To Be An Entrepreneur
+            </p>
+            <div class="mt-16 grid grid-cols-1 sm:grid-cols-2 gap-8 max-w-2xl mx-auto animate-fade-in-up" style="animation-delay: 0.6s;">
+                <div class="backdrop-blur-md bg-white/10 rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="text-4xl font-bold mb-2">44</div>
+                    <div class="text-white/80">Anggota Aktif</div>
+                </div>
+                <div class="backdrop-blur-md bg-white/10 rounded-2xl p-6 border border-white/20 hover:bg-white/20 transition-all duration-300 transform hover:-translate-y-2">
+                    <div class="text-4xl font-bold mb-2">10</div>
+                    <div class="text-white/80">Departemen</div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+            <svg class="w-6 h-6 text-white/50" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+        </div>
+    </header>
+
+    <section class="bg-white py-20 lg:py-32 px-6">
+      <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center reveal">
+        <div>
+          <span class="inline-block px-3 py-1 mb-4 text-sm font-semibold text-indigo-700 bg-indigo-100 rounded-full">Tentang SEEO</span>
+          <h2 class="text-4xl sm:text-5xl font-bold leading-tight mb-6">Mengenal Kami Lebih Dekat</h2>
+          <p class="text-lg text-gray-600 mb-8 max-w-xl text-justify">
+            Unit Kegiatan Mahasiswa Fakultas Teknik UNSOED yang bergerak di bidang kewirausahaan. Kami fokus pada pengembangan dan pengelolaan bisnis, serta membina calon wirausahawan melalui brand unggulan kami, Blaterian. Kami menyediakan berbagai pelatihan, workshop, dan seminar untuk meningkatkan keterampilan dan pengetahuan anggota.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <a href="structure.html" class="bg-indigo-600 text-white px-6 py-3 rounded-lg font-bold hover:bg-indigo-700 transition transform hover:scale-105 shadow-lg hover:shadow-indigo-500/30">Struktur Organisasi</a>
+            <a href="activity.html" class="border-2 border-gray-300 text-gray-700 px-6 py-3 rounded-lg font-bold hover:bg-gray-100 hover:border-gray-400 transition transform hover:scale-105">Lihat Kegiatan</a>
+          </div>
+        </div>
+        <div class="relative hidden lg:flex justify-center reveal" style="transition-delay: 0.2s;">
+          <img src="seeologo.webp" alt="SEEO Logo" class="rounded-full shadow-2xl w-96 h-96 object-cover border-8 border-white animate-float"/>
+          <div class="absolute -top-10 -right-10 w-24 h-24 bg-indigo-100 rounded-full -z-10"></div>
+          <div class="absolute -bottom-10 -left-10 w-32 h-32 bg-gray-100 rounded-full -z-10"></div>
+        </div>
+    </div>
+    </section>
+
+    <section id="blaterian" class="bg-yellow-400 py-20 lg:py-32 px-6 overflow-hidden">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center reveal">
+            <div class="relative hidden lg:block reveal" style="transition-delay: 0.2s;">
+              <img src="blaterianlogo.png" alt="Blaterian Logo" class="rounded-full shadow-2xl w-96 h-96 object-cover border-8 border-white animate-float" style="animation-delay: -3s;"/>
+              <div class="absolute -top-10 -left-10 w-24 h-24 bg-yellow-300/50 rounded-full -z-10"></div>
+              <div class="absolute -bottom-10 -right-10 w-32 h-32 bg-yellow-300/50 rounded-full -z-10"></div>
+            </div>
+            <div class="lg:text-right">
+              <span class="inline-block px-3 py-1 mb-4 text-sm font-semibold text-yellow-800 bg-yellow-200 rounded-full">BRAND UNGGULAN</span>
+              <h2 class="text-4xl sm:text-5xl font-bold leading-tight mb-6 text-gray-900">Blaterian</h2>
+              <p class="text-lg text-gray-800 mb-8 max-w-xl lg:ml-auto text-justify">
+                Brand kebanggaan SEEO yang menyediakan berbagai produk berkualitas hasil karya anggota kami. Blaterian berfokus pada inovasi produk, mulai dari makanan dan minuman (Blaterian Foods), hingga merchandise eksklusif (Blaterian Goods). Kami berkomitmen untuk memberikan yang terbaik bagi pelanggan.
+              </p>
+              <div class="flex flex-wrap gap-4 lg:justify-end">
+                <a href="https://www.blaterianseeo.my.id/shop/home" target="_blank" class="bg-gray-900 text-white px-8 py-4 rounded-lg font-bold hover:bg-gray-800 transition transform hover:scale-105 shadow-lg hover:shadow-black/20">Kunjungi Toko</a>
+              </div>
+            </div>
+      </div>
+    </section>
+
+    <section class="py-20 lg:py-32 px-6 bg-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <span class="inline-block px-4 py-1 mb-4 text-sm font-medium text-indigo-700 bg-indigo-100 rounded-full">🚀 Aktivitas SEEO</span>
+                <h2 class="text-4xl font-extrabold text-gray-900 mb-4">Kegiatan Kewirausahaan Kami</h2>
+                <p class="text-gray-600 text-lg max-w-2xl mx-auto">Berbagai program dan kegiatan yang kami selenggarakan untuk membangun jiwa wirausaha mahasiswa Teknik UNSOED.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="group reveal bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2">
+                    <div class="relative overflow-hidden h-56"><img src="assets/entclass.JPG" alt="EntClass I" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"><div class="absolute top-4 left-4"><span class="bg-indigo-600 text-white px-3 py-1 rounded-full text-xs font-bold">Human Resource</span></div></div>
+                    <div class="p-6"><h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-indigo-600 transition-colors">EntClass I</h3><p class="text-gray-600 mb-4 text-sm text-justify">Program pelatihan wirausaha intensif, fokus pada pengembangan keterampilan bisnis vital seperti analisis pasar, perencanaan, dan pengembangan produk inovatif.</p><a href="#" class="font-bold text-sm text-indigo-600 hover:underline">Lihat Detail →</a></div>
+                </div>
+                <div class="group reveal bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2" style="transition-delay: 0.1s;">
+                    <div class="relative overflow-hidden h-56"><img src="assets/visitasi.JPG" alt="Visitasi I" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"><div class="absolute top-4 left-4"><span class="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">Public Relation</span></div></div>
+                    <div class="p-6"><h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-green-600 transition-colors">Visitasi I</h3><p class="text-gray-600 mb-4 text-sm text-justify">Kegiatan studi banding untuk meningkatkan wawasan anggota mengenai praktik kewirausahaan dan manajemen organisasi di lembaga atau perusahaan lain.</p><a href="#" class="font-bold text-sm text-green-600 hover:underline">Lihat Detail →</a></div>
+                </div>
+                <div class="group reveal bg-white rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2" style="transition-delay: 0.2s;">
+                    <div class="relative overflow-hidden h-56"><img src="assets/upgrading.webp" alt="Upgrading I" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"><div class="absolute top-4 left-4"><span class="bg-red-600 text-white px-3 py-1 rounded-full text-xs font-bold">Human Resource</span></div></div>
+                    <div class="p-6"><h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-red-600 transition-colors">Upgrading I</h3><p class="text-gray-600 mb-4 text-sm text-justify">Kegiatan bonding anggota yang dirancang untuk memperkuat hubungan tim dan meningkatkan semangat kolaborasi, dilaksanakan di Villa Danissa, Baturraden.</p><a href="#" class="font-bold text-sm text-red-600 hover:underline">Lihat Detail →</a></div>
+                </div>
+            </div>
+            <div class="text-center mt-16 reveal">
+                <a href="activity.html" class="inline-flex items-center px-8 py-4 bg-indigo-600 text-white font-bold rounded-lg hover:bg-indigo-700 transition-all duration-300 shadow-lg hover:shadow-indigo-500/40 transform hover:scale-105">
+                    Lihat Semua Kegiatan
+                    <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                 </a>
-                <a href="manual.html" class="inline-block bg-transparent text-white border border-blue-600 font-semibold py-3 px-6 rounded-lg shadow-sm hover:bg-gray-200 hover:shadow-md transition duration-300 ease-in-out hover:scale-105">
-                    User Manual
-                </a>
-            </div>
-        </div>
-        <div class="w-full lg:w-1/2 flex justify-center items-center container mx-auto px-6 py-8 lg:py-0">
-            <img src="hero.png" alt="Ilustrasi koneksi internet dan WiFi" class="w-full sm:w-2/3 md:w-1/2 lg:w-auto lg:max-h-[500px] xl:max-h-[600px] h-auto rounded-xl ">
-        </div>
-    </section>
-
-    <!-- <section class="py-16 bg-white" id="user-manual">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">User Manual</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="text-left p-6 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl text-white shadow-lg">
-                    <div class="text-4xl font-bold text-white mb-4">1</div>
-                    <h3 class="text-xl font-semibold mb-2">Atur Bobot & Alternatif</h3>
-                    <p class="text-blue-100">Sesuaikan bobot kriteria jika perlu. Anda juga bisa menambahkan alternatif paket kustom Anda sendiri ke dalam daftar perbandingan.</p>
-                </div>
-                <div class="text-left p-6 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl text-white shadow-lg">
-                    <div class="text-4xl font-bold text-white mb-4">2</div>
-                    <h3 class="text-xl font-semibold mb-2">Pilih & Kelola Paket</h3>
-                    <p class="text-blue-100">Pilih kategori paket default yang ingin disertakan. Anda dapat menghapus paket kustom yang tidak lagi diinginkan dari tabel.</p>
-                </div>
-                <div class="text-left p-6 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl text-white shadow-lg">
-                    <div class="text-4xl font-bold text-white mb-4">3</div>
-                    <h3 class="text-xl font-semibold mb-2">Hitung dan Lihat Hasil</h3>
-                    <p class="text-blue-100">Klik tombol "Hitung" untuk melihat matriks perhitungan, skor preferensi, dan peringkat paket berdasarkan metode SAW.</p>
-                </div>
-            </div>
-        </div>
-    </section> -->
-
-    <section class="bg-gray-100 py-12 sm:py-16">
-        <div class="container mx-auto px-4 sm:px-6 flex flex-col lg:flex-row items-center gap-8 lg:gap-12 xl:gap-16">
-            <div class="w-full lg:w-5/12 flex justify-center"> 
-                <img src="metode.png" alt="Ilustrasi atau diagram metode SAW" class="w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-full h-auto object-contain rounded-lg"> 
-            </div>
-            <div class="w-full lg:w-7/12 text-center lg:text-left"> 
-                <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-800 mb-4 sm:mb-6">
-                    Apa Itu Metode SAW dalam Pemilihan Paket Internet?
-                </h2>
-                <p class="text-sm sm:text-base text-gray-700 text-justify leading-relaxed sm:leading-loose">
-                    Metode Simple Additive Weighting (SAW) adalah metode pengambilan keputusan yang digunakan untuk mengevaluasi dan memilih alternatif terbaik dari sejumlah pilihan berdasarkan beberapa kriteria. Dalam konteks ini, SAW membantu membandingkan paket internet berdasarkan kriteria seperti harga (cost), kecepatan (benefit), jumlah perangkat (benefit), dan bonus (benefit). Setiap kriteria diberi bobot sesuai tingkat kepentingannya (Harga: 0.263, Kecepatan: 0.283, Perangkat: 0.223, Bonus: 0.231). Nilai setiap paket kemudian dinormalisasi dan dikalikan dengan bobot untuk menghasilkan skor preferensi. Paket dengan skor tertinggi adalah yang paling direkomendasikan.
-                </p>
             </div>
         </div>
     </section>
 
-    <section class="py-12 bg-white h-[70vh]">
-        <div class="container mx-auto px-4 sm:px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                <!-- Skala Klasifikasi Kriteria -->
-                <div>
-                    <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">Skala Klasifikasi Kriteria</h2>
-                    <div class="bg-white p-4 rounded-xl shadow-lg h-full">
-                        <div class="overflow-x-auto rounded-md border border-gray-200">
-                            <table class="w-full min-w-[500px] text-left">
-                                <thead class="bg-gray-100">
-                                    <tr>
-                                        <th class="p-3 text-sm font-semibold text-gray-600 uppercase">Skala</th>
-                                        <th class="p-3 text-sm font-semibold text-gray-600 uppercase">Harga</th>
-                                        <th class="p-3 text-sm font-semibold text-gray-600 uppercase">Kecepatan</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-gray-200">
-                                    <tr><td class="p-3 text-sm">1</td><td class="p-3 text-sm">200.000 - 299.999</td><td class="p-3 text-sm">30 - 99 Mbps</td></tr>
-                                    <tr><td class="p-3 text-sm">2</td><td class="p-3 text-sm">300.000 - 399.999</td><td class="p-3 text-sm">100 - 199 Mbps</td></tr>
-                                    <tr><td class="p-3 text-sm">3</td><td class="p-3 text-sm">400.000 - 499.999</td><td class="p-3 text-sm">200 - 299 Mbps</td></tr>
-                                    <tr><td class="p-3 text-sm">4</td><td class="p-3 text-sm">500.000 - 599.999</td><td class="p-3 text-sm">300 - 399 Mbps</td></tr>
-                                    <tr><td class="p-3 text-sm">5</td><td class="p-3 text-sm">≥ 600.000</td><td class="p-3 text-sm">≥ 400 Mbps</td></tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+    <footer class="bg-gray-900 text-white pt-16 pb-10 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+            <div class="lg:col-span-2">
+                <div class="flex items-center gap-2 mb-4">
+                    <img src="seeologo.webp" alt="SEEO Logo" class="h-10 w-10 rounded-full">
+                    <h2 class="text-xl font-bold">SEEO</h2>
                 </div>
-                <!-- Jenis Kriteria -->
-                <div>
-                    <h2 class="text-2xl font-semibold text-center text-gray-800 mb-6">Jenis Kriteria</h2>
-                    <div class="bg-white p-4 rounded-xl shadow-lg h-full">
-                         <div class="overflow-x-auto rounded-md border border-gray-200">
-                            <table class="w-full text-left">
-                                <thead class="bg-gray-100">
-                                    <tr>
-                                        <th class="p-3 text-sm font-semibold text-gray-600 uppercase tracking-wider">No</th>
-                                        <th class="p-3 text-sm font-semibold text-gray-600 uppercase tracking-wider">Kriteria</th>
-                                        <th class="p-3 text-sm font-semibold text-gray-600 uppercase tracking-wider">Keterangan</th>
-                                        <th class="p-3 text-sm font-semibold text-gray-600 uppercase tracking-wider">Jenis</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="divide-y divide-gray-200">
-                                    <tr>
-                                        <td class="p-3 text-sm text-gray-700">1</td>
-                                        <td class="p-3 text-sm text-gray-700">C1</td>
-                                        <td class="p-3 text-sm text-gray-700">Harga</td>
-                                        <td class="p-3 text-sm text-gray-700 font-medium"><span class="bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs">COST</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-3 text-sm text-gray-700">2</td>
-                                        <td class="p-3 text-sm text-gray-700">C2</td>
-                                        <td class="p-3 text-sm text-gray-700">Kecepatan Internet</td>
-                                        <td class="p-3 text-sm text-gray-700 font-medium"><span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">BENEFIT</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-3 text-sm text-gray-700">3</td>
-                                        <td class="p-3 text-sm text-gray-700">C3</td>
-                                        <td class="p-3 text-sm text-gray-700">Jumlah Maksimal Perangkat</td>
-                                        <td class="p-3 text-sm text-gray-700 font-medium"><span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">BENEFIT</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="p-3 text-sm text-gray-700">4</td>
-                                        <td class="p-3 text-sm text-gray-700">C4</td>
-                                        <td class="p-3 text-sm text-gray-700">Bonus/Promo</td>
-                                        <td class="p-3 text-sm text-gray-700 font-medium"><span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs">BENEFIT</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                <p class="text-gray-400 text-sm mb-6">Bergabunglah dengan komunitas wirausahawan muda Fakultas Teknik UNSOED untuk membangun masa depan bisnis yang lebih cerah.</p>
+            </div>
+            <div>
+                <h4 class="text-gray-200 font-semibold mb-4 text-sm uppercase tracking-wider">Tautan Cepat</h4>
+                <ul class="space-y-3 text-sm text-gray-400">
+                    <li><a href="#home" class="hover:text-yellow-400 transition">Beranda</a></li>
+                    <li><a href="structure.html" class="hover:text-yellow-400 transition">Struktur</a></li>
+                    <li><a href="activity.html" class="hover:text-yellow-400 transition">Kegiatan</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-gray-200 font-semibold mb-4 text-sm uppercase tracking-wider">Hubungi Kami</h4>
+                <ul class="space-y-3 text-sm text-gray-400">
+                    <li><a href="mailto:info@seeo.com" class="hover:text-yellow-400 transition">info@seeo.com</a></li>
+                    <li><p>Fakultas Teknik, UNSOED</p></li>
+                </ul>
             </div>
         </div>
-    </section>
-
-    <main id="calculation-section" class="py-10">
-        <div class="container mx-auto px-4 sm:px-6 space-y-8">
-            <h1 class="text-2xl sm:text-3xl font-bold text-center text-white">Perhitungan Alternatif Paket</h1>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-5 gap-8">
-                <div class="lg:col-span-2 bg-white rounded-xl shadow-lg p-6 space-y-6">
-                    <div>
-                        <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">Atur Bobot Kriteria</h2>
-                        <div id="weights-form" class="space-y-4">
-                            <div class="flex items-center gap-4"><label for="weight-harga" class="w-28 text-sm font-medium">Harga (C1)</label><input type="number" id="weight-harga" value="0.263" step="0.001" class="flex-grow p-2 border-gray-300 rounded-md shadow-sm"></div>
-                            <div class="flex items-center gap-4"><label for="weight-kecepatan" class="w-28 text-sm font-medium">Kecepatan (C2)</label><input type="number" id="weight-kecepatan" value="0.283" step="0.001" class="flex-grow p-2 border-gray-300 rounded-md shadow-sm"></div>
-                            <div class="flex items-center gap-4"><label for="weight-perangkat" class="w-28 text-sm font-medium">Perangkat (C3)</label><input type="number" id="weight-perangkat" value="0.223" step="0.001" class="flex-grow p-2 border-gray-300 rounded-md shadow-sm"></div>
-                            <div class="flex items-center gap-4"><label for="weight-bonus" class="w-28 text-sm font-medium">Bonus (C4)</label><input type="number" id="weight-bonus" value="0.231" step="0.001" class="flex-grow p-2 border-gray-300 rounded-md shadow-sm"></div>
-                            <div id="weight-validation" class="text-sm text-center p-2 rounded-md"></div>
-                        </div>
-                    </div>
-                    <div>
-                         <h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">Tambah Alternatif Kustom</h2>
-                        <form id="customPackageForm" class="space-y-3">
-                            <input type="text" id="nama" placeholder="Nama Paket Kustom" class="w-full p-2 border-gray-300 rounded-md" required>
-                            <div class="grid grid-cols-2 gap-3">
-                                <input type="number" id="harga" placeholder="Harga (e.g., 350000)" class="w-full p-2 border-gray-300 rounded-md" required>
-                                <input type="number" id="kecepatan" placeholder="Kecepatan (Mbps)" class="w-full p-2 border-gray-300 rounded-md" required>
-                                <input type="number" id="perangkat" placeholder="Jml Perangkat" class="w-full p-2 border-gray-300 rounded-md" required>
-                                <input type="number" id="bonus" placeholder="Jml Bonus (5-10)" min="5" max="10" class="w-full p-2 border-gray-300 rounded-md" required>
-                            </div>
-                            <button type="submit" class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md transition-all">Tambah Paket Kustom</button>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="lg:col-span-3 bg-white rounded-xl shadow-lg p-6 sm:p-8">
-                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
-                        <h2 class="text-xl font-semibold text-gray-800 mb-3 sm:mb-0">Daftar Alternatif</h2>
-                        <div class="flex items-center gap-3"><label for="categorySelector" class="text-sm font-medium">Paket Default:</label><select id="categorySelector" class="p-2 border-gray-300 rounded-md shadow-sm"><option value="Internet">Internet Saja</option><option value="Internet + TV">Internet + TV</option><option value="Internet + Streaming (Star Movie)">Streaming (Star Movie)</option><option value="Internet + Streaming (Planet Movie)">Streaming (Planet Movie)</option><option value="Internet + Streaming (Rocket Sport)">Streaming (Rocket Sport)</option><option value="Internet + Streaming (Galaxy Ultimate)">Streaming (Galaxy Ultimate)</option><option value="None">Kosong (Hanya Kustom)</option></select></div>
-                    </div>
-                    <div class="overflow-x-auto rounded-md border border-gray-200">
-                        <table id="alternativesTable" class="w-full min-w-[600px] text-left">
-                            <thead class="bg-gray-100 sticky top-0"><tr class="z-10"><th class="p-3 text-xs font-semibold text-gray-600 uppercase">Nama</th><th class="p-3 text-xs font-semibold text-gray-600 uppercase">Harga</th><th class="p-3 text-xs font-semibold text-gray-600 uppercase">Kecepatan</th><th class="p-3 text-xs font-semibold text-gray-600 uppercase">Perangkat</th><th class="p-3 text-xs font-semibold text-gray-600 uppercase">Bonus</th><th class="p-3 text-xs font-semibold text-gray-600 uppercase text-center">Aksi</th></tr></thead>
-                            <tbody id="packagesTableBody" class="divide-y divide-gray-200"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center">
-                 <button id="calculateButton" class="w-full bg-white hover:bg-gray-100 text-blue-700 font-bold py-3 px-4 rounded-md shadow-lg transition-transform hover:scale-105">HITUNG REKOMENDASI (SAW)</button>
-            </div>
-            
-            <div id="calculation-results-container" class="hidden space-y-8">
-                <div class="bg-white p-6 rounded-xl shadow-lg"><h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">Matriks Awal (Skala 1-5)</h2><div class="overflow-x-auto rounded-md border"><table class="w-full min-w-full text-left"><thead class="bg-gray-100"><tr><th class="p-3 font-semibold uppercase text-xs">Paket</th><th class="p-3 font-semibold uppercase text-xs text-center">Harga (C1)</th><th class="p-3 font-semibold uppercase text-xs text-center">Kecepatan (C2)</th><th class="p-3 font-semibold uppercase text-xs text-center">Perangkat (C3)</th><th class="p-3 font-semibold uppercase text-xs text-center">Bonus (C4)</th></tr></thead><tbody id="scaledMatrixTableBody" class="divide-y"></tbody></table></div></div>
-                <div class="bg-white p-6 rounded-xl shadow-lg"><h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">Matriks Ternormalisasi</h2><div class="overflow-x-auto rounded-md border"><table class="w-full min-w-full text-left"><thead class="bg-gray-100"><tr><th class="p-3 font-semibold uppercase text-xs">Paket</th><th class="p-3 font-semibold uppercase text-xs text-center">Norm. Harga</th><th class="p-3 font-semibold uppercase text-xs text-center">Norm. Kecepatan</th><th class="p-3 font-semibold uppercase text-xs text-center">Norm. Perangkat</th><th class="p-3 font-semibold uppercase text-xs text-center">Norm. Bonus</th></tr></thead><tbody id="normalizedMatrixTableBody" class="divide-y"></tbody></table></div></div>
-                <div class="bg-white p-6 rounded-xl shadow-lg"><h2 class="text-xl font-semibold text-gray-800 mb-4 border-b pb-2">Hasil Akhir & Peringkat</h2><div class="overflow-x-auto rounded-md border"><table class="w-full min-w-full text-left"><thead class="bg-gray-100"><tr><th class="p-3 font-semibold uppercase text-xs text-center">Peringkat</th><th class="p-3 font-semibold uppercase text-xs">Nama Paket</th><th class="p-3 font-semibold uppercase text-xs text-center">Skor Preferensi (V)</th></tr></thead><tbody id="resultTableBody" class="divide-y"></tbody></table></div></div>
-            </div>
+        <div class="border-t border-gray-800 mt-12 pt-6 text-sm text-gray-500 text-center">
+            <p>&copy; 2025 Soedirman Entrepreneur Engineering. All rights reserved.</p>
         </div>
-    </main>
-
-    <section class="bg-white py-16">
-        <div class="container mx-auto px-4">
-            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold mb-8 text-center text-gray-800">Tim Kami</h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="p-4 sm:p-6 rounded-lg text-center"><img src="sellyjuan.jpg" alt="Foto Sellyjuan Alya Rosalina" class="w-32 h-40 sm:w-36 sm:h-48 md:w-40 md:h-52 lg:w-48 lg:h-60 object-cover rounded-lg mx-auto mb-5 shadow-md"><h3 class="text-md sm:text-lg font-semibold text-gray-800">Sellyjuan Alya Rosalina</h3><p class="text-sm text-gray-500 mt-1">H1D023006</p></div>
-                <div class="p-4 sm:p-6 rounded-lg text-center"><img src="zaza.jpg" alt="Foto Zaizafun Hanifah Zainnur Hanun" class="w-32 h-40 sm:w-36 sm:h-48 md:w-40 md:h-52 lg:w-48 lg:h-60 object-cover rounded-lg mx-auto mb-5 shadow-md"><h3 class="text-md sm:text-lg font-semibold text-gray-800">Zaizafun Hanifah Zainnur Hanun</h3><p class="text-sm text-gray-500 mt-1">H1D023021</p></div>
-                <div class="p-4 sm:p-6 rounded-lg text-center"><img src="diken.jpg" alt="Foto Dimas Kendika Fazrulfalah" class="w-32 h-40 sm:w-36 sm:h-48 md:w-40 md:h-52 lg:w-48 lg:h-60 object-cover rounded-lg mx-auto mb-5 shadow-md"><h3 class="text-md sm:text-lg font-semibold text-gray-800">Dimas Kendika Fazrulfalah</h3><p class="text-sm text-gray-500 mt-1">H1D023083</p></div>
-            </div>
-        </div>
-    </section>
+    </footer>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // --- DATA STORE ---
-            const allPredefinedPackages = [
-                { nama: 'Value', harga: 235000, kecepatan: 40, perangkat: 3, bonus: 5, kategori: 'Internet' },
-                { nama: 'Fast', harga: 250000, kecepatan: 100, perangkat: 5, bonus: 5, kategori: 'Internet' },
-                { nama: 'Nova', harga: 300000, kecepatan: 200, perangkat: 7, bonus: 6, kategori: 'Internet' },
-                { nama: 'MyGamer', harga: 400000, kecepatan: 350, perangkat: 10, bonus: 8, kategori: 'Internet' },
-                { nama: 'Prime', harga: 500000, kecepatan: 500, perangkat: 15, bonus: 5, kategori: 'Internet' },
-                { nama: 'Value + TV', harga: 320000, kecepatan: 40, perangkat: 3, bonus: 8, kategori: 'Internet + TV' },
-                { nama: 'Fast + TV', harga: 335000, kecepatan: 100, perangkat: 5, bonus: 8, kategori: 'Internet + TV' },
-                { nama: 'Nova + TV', harga: 385000, kecepatan: 200, perangkat: 7, bonus: 8, kategori: 'Internet + TV' },
-                { nama: 'MyGamer + TV', harga: 485000, kecepatan: 350, perangkat: 10, bonus: 10, kategori: 'Internet + TV' },
-                { nama: 'Prime + TV', harga: 585000, kecepatan: 500, perangkat: 15, bonus: 8, kategori: 'Internet + TV' },
-                { nama: 'Value + Star Movie', harga: 300000, kecepatan: 40, perangkat: 3, bonus: 7, kategori: 'Internet + Streaming (Star Movie)' },
-                { nama: 'Fast + Star Movie', harga: 315000, kecepatan: 100, perangkat: 5, bonus: 7, kategori: 'Internet + Streaming (Star Movie)' },
-                { nama: 'Nova + Star Movie', harga: 365000, kecepatan: 200, perangkat: 7, bonus: 7, kategori: 'Internet + Streaming (Star Movie)' },
-                { nama: 'MyGamer + Star Movie', harga: 465000, kecepatan: 350, perangkat: 10, bonus: 8, kategori: 'Internet + Streaming (Star Movie)' },
-                { nama: 'Prime + Star Movie', harga: 565000, kecepatan: 500, perangkat: 15, bonus: 7, kategori: 'Internet + Streaming (Star Movie)' },
-                { nama: 'Value + Planet Movie', harga: 425000, kecepatan: 40, perangkat: 3, bonus: 9, kategori: 'Internet + Streaming (Planet Movie)' },
-                { nama: 'Fast + Planet Movie', harga: 440000, kecepatan: 100, perangkat: 5, bonus: 9, kategori: 'Internet + Streaming (Planet Movie)' },
-                { nama: 'Nova + Planet Movie', harga: 490000, kecepatan: 200, perangkat: 7, bonus: 9, kategori: 'Internet + Streaming (Planet Movie)' },
-                { nama: 'MyGamer + Planet Movie', harga: 590000, kecepatan: 350, perangkat: 10, bonus: 10, kategori: 'Internet + Streaming (Planet Movie)' },
-                { nama: 'Prime + Planet Movie', harga: 690000, kecepatan: 500, perangkat: 15, bonus: 9, kategori: 'Internet + Streaming (Planet Movie)' },
-                { nama: 'Value + Rocket Sport', harga: 385000, kecepatan: 40, perangkat: 3, bonus: 6, kategori: 'Internet + Streaming (Rocket Sport)' },
-                { nama: 'Fast + Rocket Sport', harga: 400000, kecepatan: 100, perangkat: 5, bonus: 6, kategori: 'Internet + Streaming (Rocket Sport)' },
-                { nama: 'Nova + Rocket Sport', harga: 450000, kecepatan: 200, perangkat: 7, bonus: 6, kategori: 'Internet + Streaming (Rocket Sport)' },
-                { nama: 'MyGamer + Rocket Sport', harga: 550000, kecepatan: 350, perangkat: 10, bonus: 7, kategori: 'Internet + Streaming (Rocket Sport)' },
-                { nama: 'Prime + Rocket Sport', harga: 650000, kecepatan: 500, perangkat: 15, bonus: 6, kategori: 'Internet + Streaming (Rocket Sport)' },
-                { nama: 'Value + Galaxy Ultimate', harga: 485000, kecepatan: 40, perangkat: 3, bonus: 9, kategori: 'Internet + Streaming (Galaxy Ultimate)' },
-                { nama: 'Fast + Galaxy Ultimate', harga: 500000, kecepatan: 100, perangkat: 5, bonus: 9, kategori: 'Internet + Streaming (Galaxy Ultimate)' },
-                { nama: 'Nova + Galaxy Ultimate', harga: 550000, kecepatan: 200, perangkat: 7, bonus: 9, kategori: 'Internet + Streaming (Galaxy Ultimate)' },
-                { nama: 'MyGamer + Galaxy Ultimate', harga: 650000, kecepatan: 350, perangkat: 10, bonus: 10, kategori: 'Internet + Streaming (Galaxy Ultimate)' },
-                { nama: 'Prime + Galaxy Ultimate', harga: 750000, kecepatan: 600, perangkat: 15, bonus: 9, kategori: 'Internet + Streaming (Galaxy Ultimate)' },
-            ];
-            let customPackages = [];
-
-            // --- DOM ELEMENTS ---
-            const dom = {
-                alternativesTable: document.getElementById('alternativesTable'),
-                categorySelector: document.getElementById('categorySelector'),
-                packagesTableBody: document.getElementById('packagesTableBody'),
-                calculateButton: document.getElementById('calculateButton'),
-                resultTableBody: document.getElementById('resultTableBody'),
-                calculationResultsContainer: document.getElementById('calculation-results-container'),
-                scaledMatrixTableBody: document.getElementById('scaledMatrixTableBody'),
-                normalizedMatrixTableBody: document.getElementById('normalizedMatrixTableBody'),
-                customPackageForm: document.getElementById('customPackageForm'),
-                weightsForm: document.getElementById('weights-form'),
-                weightHargaInput: document.getElementById('weight-harga'),
-                weightKecepatanInput: document.getElementById('weight-kecepatan'),
-                weightPerangkatInput: document.getElementById('weight-perangkat'),
-                weightBonusInput: document.getElementById('weight-bonus'),
-                weightValidation: document.getElementById('weight-validation'),
-            };
-
-            // --- FUNCTIONS ---
-            const mapToScale = (value, type) => {
-                if (type === 'harga') { if (value < 300000) return 1; if (value < 400000) return 2; if (value < 500000) return 3; if (value < 600000) return 4; return 5; }
-                if (type === 'kecepatan') { if (value < 100) return 1; if (value < 200) return 2; if (value < 300) return 3; if (value < 400) return 4; return 5; }
-                if (type === 'perangkat') { if (value <= 3) return 1; if (value <= 5) return 2; if (value <= 7) return 3; if (value <= 10) return 4; return 5; }
-                if (type === 'bonus') { if (value <= 5) return 1; if (value === 6) return 2; if (value === 7) return 3; if (value === 8) return 4; if (value >= 9) return 5; }
-                return 1;
-            };
-
-            const updateDisplayedPackages = () => {
-                const selectedCategory = dom.categorySelector.value;
-                const predefinedPackages = selectedCategory === 'None' ? [] : allPredefinedPackages.filter(p => p.kategori === selectedCategory);
-                
-                const allCurrentPackages = [...predefinedPackages, ...customPackages];
-                const hasCustomPackages = customPackages.length > 0;
-
-                // Toggle visibility of the action column
-                if (hasCustomPackages) {
-                    dom.alternativesTable.classList.add('has-custom-packages');
-                } else {
-                    dom.alternativesTable.classList.remove('has-custom-packages');
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
                 }
-
-                dom.packagesTableBody.innerHTML = '';
-                if (allCurrentPackages.length === 0) {
-                    dom.packagesTableBody.innerHTML = `<tr><td colspan="6" class="p-4 text-center text-gray-500">Tidak ada alternatif.</td></tr>`;
-                } else {
-                    allCurrentPackages.forEach((pkg, index) => {
-                        const isCustom = index >= predefinedPackages.length;
-                        const rowClass = isCustom ? 'custom-package-row' : '';
-                        // Always generate the 6th cell, it will be hidden by CSS if not needed
-                        const deleteButton = isCustom ? `<button data-index="${index - predefinedPackages.length}" class="remove-btn bg-red-500 text-white px-2 py-1 text-xs rounded hover:bg-red-600">Hapus</button>` : 'Default';
-                        dom.packagesTableBody.innerHTML += `<tr class="${rowClass}"><td class="p-3 text-sm font-medium">${pkg.nama} ${isCustom ? '<span class="text-xs text-blue-500">(Kustom)</span>' : ''}</td><td class="p-3 text-sm">${pkg.harga.toLocaleString('id-ID')}</td><td class="p-3 text-sm">${pkg.kecepatan}</td><td class="p-3 text-sm">${pkg.perangkat}</td><td class="p-3 text-sm">${pkg.bonus}</td><td class="p-3 text-sm text-center">${deleteButton}</td></tr>`;
-                    });
-                }
-                dom.calculationResultsContainer.classList.add('hidden');
-            };
-
-            const handleCustomFormSubmit = (e) => {
-                e.preventDefault();
-                const form = e.target;
-                customPackages.push({ nama: form.nama.value, harga: parseInt(form.harga.value), kecepatan: parseInt(form.kecepatan.value), perangkat: parseInt(form.perangkat.value), bonus: parseInt(form.bonus.value) });
-                updateDisplayedPackages();
-                form.reset();
-            };
-
-            const handlePackageRemove = (e) => {
-                if (e.target.classList.contains('remove-btn')) {
-                    const index = parseInt(e.target.dataset.index);
-                    customPackages.splice(index, 1);
-                    updateDisplayedPackages();
-                }
-            };
-            
-            const getCurrentWeights = () => ({
-                harga: parseFloat(dom.weightHargaInput.value) || 0,
-                kecepatan: parseFloat(dom.weightKecepatanInput.value) || 0,
-                perangkat: parseFloat(dom.weightPerangkatInput.value) || 0,
-                bonus: parseFloat(dom.weightBonusInput.value) || 0,
             });
+        }, { threshold: 0.1 });
 
-            const validateWeights = () => {
-                const weights = getCurrentWeights();
-                const total = Object.values(weights).reduce((sum, w) => sum + w, 0);
-                if (Math.abs(total - 1.0) > 0.001) {
-                    dom.weightValidation.textContent = `Peringatan: Total bobot ${total.toFixed(3)}, idealnya 1.`;
-                    dom.weightValidation.className = 'text-sm text-center p-2 rounded-md bg-yellow-100 text-yellow-800';
-                    return false;
-                } else {
-                    dom.weightValidation.textContent = `Total bobot: ${total.toFixed(3)} (Valid)`;
-                    dom.weightValidation.className = 'text-sm text-center p-2 rounded-md bg-green-100 text-green-800';
-                    return true;
-                }
-            };
-
-            const calculateSAW = () => {
-                validateWeights();
-                const weights = getCurrentWeights();
-                const selectedCategory = dom.categorySelector.value;
-                const predefinedPackages = selectedCategory === 'None' ? [] : allPredefinedPackages.filter(p => p.kategori === selectedCategory);
-                const currentPackages = [...predefinedPackages, ...customPackages];
-
-                if (currentPackages.length < 2) { alert("Perlu setidaknya 2 alternatif untuk perbandingan."); return; }
-
-                const scaledMatrix = currentPackages.map((pkg, i) => ({ id: i, nama: pkg.nama, harga: mapToScale(pkg.harga, 'harga'), kecepatan: mapToScale(pkg.kecepatan, 'kecepatan'), perangkat: mapToScale(pkg.perangkat, 'perangkat'), bonus: mapToScale(pkg.bonus, 'bonus') }));
-                const minHarga = Math.min(...scaledMatrix.map(p => p.harga));
-                const maxValues = { kecepatan: Math.max(...scaledMatrix.map(p => p.kecepatan)), perangkat: Math.max(...scaledMatrix.map(p => p.perangkat)), bonus: Math.max(...scaledMatrix.map(p => p.bonus)) };
-                const normalizedMatrix = scaledMatrix.map(pkg => ({ id: pkg.id, nama: pkg.nama, harga: minHarga / pkg.harga, kecepatan: pkg.kecepatan / maxValues.kecepatan, perangkat: pkg.perangkat / maxValues.perangkat, bonus: pkg.bonus / maxValues.bonus }));
-                const preferenceScores = normalizedMatrix.map(pkg => ({ id: pkg.id, nama: pkg.nama, score: (weights.harga * pkg.harga) + (weights.kecepatan * pkg.kecepatan) + (weights.perangkat * pkg.perangkat) + (weights.bonus * pkg.bonus) }));
-                preferenceScores.sort((a, b) => b.score - a.score);
-
-                dom.scaledMatrixTableBody.innerHTML = scaledMatrix.map(p => `<tr><td class="p-2 text-sm">${p.nama}</td><td class="p-2 text-sm text-center">${p.harga}</td><td class="p-2 text-sm text-center">${p.kecepatan}</td><td class="p-2 text-sm text-center">${p.perangkat}</td><td class="p-2 text-sm text-center">${p.bonus}</td></tr>`).join('');
-                dom.normalizedMatrixTableBody.innerHTML = normalizedMatrix.map(p => `<tr><td class="p-2 text-sm">${p.nama}</td><td class="p-2 text-sm text-center">${p.harga.toFixed(3)}</td><td class="p-2 text-sm text-center">${p.kecepatan.toFixed(3)}</td><td class="p-2 text-sm text-center">${p.perangkat.toFixed(3)}</td><td class="p-2 text-sm text-center">${p.bonus.toFixed(3)}</td></tr>`).join('');
-                dom.resultTableBody.innerHTML = preferenceScores.map((p, i) => { const rank = i + 1; const isBest = rank === 1; return `<tr class="${isBest ? 'best-package' : ''}"><td class="p-3 text-center">${isBest ? `<span class="rank-badge py-1 px-2.5 rounded-full">${rank}</span>` : rank}</td><td class="p-3 text-sm">${p.nama}</td><td class="p-3 text-sm font-semibold text-center">${p.score.toFixed(4)}</td></tr>`; }).join('');
-
-                dom.calculationResultsContainer.classList.remove('hidden');
-                dom.calculationResultsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            };
-
-            // --- EVENT LISTENERS ---
-            dom.categorySelector.addEventListener('change', updateDisplayedPackages);
-            dom.customPackageForm.addEventListener('submit', handleCustomFormSubmit);
-            dom.packagesTableBody.addEventListener('click', handlePackageRemove);
-            dom.weightsForm.addEventListener('input', validateWeights);
-            dom.calculateButton.addEventListener('click', calculateSAW);
-
-            // --- INITIALIZATION ---
-            updateDisplayedPackages();
-            validateWeights();
+        revealElements.forEach(el => {
+            observer.observe(el);
         });
     </script>
 </body>

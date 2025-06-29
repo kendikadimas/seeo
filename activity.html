@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kegiatan & Artikel - Soedirman Entrepreneur Engineering</title> 
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = { theme: { extend: { fontFamily: { 'sans': ['Poppins', 'sans-serif'] } } } }
+    </script>
+    
+    <style>
+        .reveal { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body class="bg-gray-50" x-data="{ atTop: true }" @scroll.window="atTop = (window.scrollY < 50)">
+
+    <nav x-data="{ open: false }" 
+         :class="{ 'bg-white/80 backdrop-blur-md shadow-md': !atTop, 'text-white': atTop }" 
+         class="py-4 px-6 fixed top-0 w-full z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <img src="seeologo.webp" alt="SEEO Logo" class="h-10 w-10 rounded-full">
+                <span :class="{ 'text-gray-900': !atTop, 'text-white': atTop }" class="font-semibold text-lg tracking-tight transition-colors">SEEO</span>
+            </div>
+            <ul class="hidden md:flex items-center gap-6 text-sm font-bold">
+                <li><a href="index.html" class="hover:text-indigo-500 transition-colors">Beranda</a></li>
+                <li><a href="structure.html" class="hover:text-indigo-500 transition-colors">Struktur</a></li>
+                <li><a href="activity.html" class="text-indigo-500 transition-colors">Kegiatan</a></li>
+            </ul>
+            <div class="hidden md:flex items-center">
+                <a href="https://www.blaterianseeo.my.id/shop/home" target="_blank" class="bg-yellow-500 hover:bg-yellow-600 text-white text-sm px-6 py-3 rounded-lg font-bold transition shadow-lg hover:shadow-yellow-500/30">Blaterian</a>
+            </div>
+            <button @click="open = !open" class="md:hidden text-2xl focus:outline-none" :class="{ 'text-gray-700': !atTop, 'text-white': atTop }">
+                <span x-show="!open">☰</span><span x-show="open">✕</span>
+            </button>
+        </div>
+        <div x-show="open" x-transition class="md:hidden mt-4 p-4 border-t border-gray-200 bg-white/95 backdrop-blur-md rounded-lg space-y-3 text-sm font-medium text-gray-700">
+            <a href="index.html" class="block px-3 py-2 hover:bg-gray-100 rounded">Beranda</a>
+            <a href="structure.html" class="block px-3 py-2 hover:bg-gray-100 rounded">Struktur</a>
+            <a href="activity.html" class="block px-3 py-2 bg-gray-100 text-indigo-600 font-semibold rounded">Kegiatan</a>
+            <hr class="my-2" /><a href="https://www.blaterianseeo.my.id/shop/home" target="_blank" class="block bg-yellow-500 hover:bg-yellow-600 text-white text-center px-4 py-2 rounded-lg font-medium transition">Blaterian</a>
+        </div>
+    </nav>
+
+    <main>
+        <div class="relative pt-48 pb-24 px-6 text-center bg-gray-900 overflow-hidden">
+            <div class="absolute inset-0 bg-cover bg-center opacity-20" style="background-image: url('assets/entclass.JPG');"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/50 to-transparent"></div>
+            <div class="relative z-10">
+                <h1 class="text-4xl sm:text-5xl font-black text-white mb-4 animate-fade-in-down">Dokumentasi Kegiatan SEEO</h1>
+                <p class="text-lg text-white/80 max-w-3xl mx-auto animate-fade-in-up" style="animation-delay: 0.2s;">Jelajahi berbagai program dan aktivitas yang telah kami selenggarakan untuk membangun dan menginspirasi jiwa wirausaha di kalangan mahasiswa.</p>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto mt-16 px-4 sm:px-6 lg:px-8">
+            <section class="mb-20 reveal">
+                <div class="group grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center bg-white p-6 rounded-2xl shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-2">
+                    <div class="relative overflow-hidden rounded-xl h-96">
+                        <img src="assets/entclass.JPG" alt="EntClass" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                    </div>
+                    <div class="flex flex-col justify-center">
+                        <span class="inline-block px-3 py-1 mb-4 text-xs font-semibold text-white bg-indigo-600 rounded-full w-fit">Human Resources</span>
+                        <h2 class="text-3xl font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">EntClass 1</h2>
+                        <p class="text-slate-600 mb-4">Sebuah program pelatihan berwirausaha yang dirancang untuk mahasiswa, fokus pada pengembangan keterampilan bisnis seperti analisis pasar, perencanaan bisnis, dan pengembangan produk. Dengan program ini, mahasiswa diharapkan dapat membangun keterampilan wirausaha yang kuat.</p>
+                        <div class="text-sm text-slate-500 mb-6">
+                            <span>25 Mei 2024</span> &middot; <span>Aula FT UNSOED</span>
+                        </div>
+                        <a href="#" class="inline-flex items-center font-bold text-indigo-600 w-fit">Baca Selengkapnya
+                            <svg class="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 flex flex-col reveal" style="transition-delay: 0.1s;">
+                        <div class="relative overflow-hidden h-48 rounded-t-xl"><img src="assets/visitasi.JPG" alt="Visitasi I" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <div class="flex items-center justify-between mb-3"><span class="bg-green-100 text-green-600 px-3 py-1 rounded-full text-xs font-medium">Public Relation</span><span class="text-xs text-slate-500">18 Mei 2024</span></div>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-green-600 transition-colors flex-grow">Visitasi I ke KOPMA UIN SAIZU</h3>
+                            <p class="text-sm text-justify text-slate-600 mb-4">Kegiatan studi banding untuk meningkatkan wawasan anggota mengenai praktik kewirausahaan di organisasi lain, kali ini mengunjungi KOPMA UIN SAIZU Purwokerto.</p>
+                            <a href="#" class="mt-auto font-semibold text-sm text-green-600 w-fit">Lihat Detail →</a>
+                        </div>
+                    </div>
+                    <div class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 flex flex-col reveal" style="transition-delay: 0.2s;">
+                        <div class="relative overflow-hidden h-48 rounded-t-xl"><img src="assets/upgrading.webp" alt="Upgrading I" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <div class="flex items-center justify-between mb-3"><span class="bg-red-100 text-red-600 px-3 py-1 rounded-full text-xs font-medium">Human Resources</span><span class="text-xs text-slate-500">11 Mei 2024</span></div>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-red-600 transition-colors flex-grow">Upgrading I</h3>
+                            <p class="text-sm text-justify text-slate-600 mb-4">Kegiatan bonding anggota SEEO untuk memperkuat hubungan tim dan meningkatkan semangat kolaborasi melalui permainan tim, diskusi, dan sesi motivasi.</p>
+                            <a href="#" class="mt-auto font-semibold text-sm text-red-600 w-fit">Lihat Detail →</a>
+                        </div>
+                    </div>
+                    <div class="group bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 flex flex-col reveal" style="transition-delay: 0.3s;">
+                        <div class="relative overflow-hidden h-48 rounded-t-xl"><img src="assets/raplen1.jpg" alt="Rapat Pleno" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"></div>
+                        <div class="p-6 flex flex-col flex-grow">
+                            <div class="flex items-center justify-between mb-3"><span class="bg-yellow-100 text-yellow-600 px-3 py-1 rounded-full text-xs font-medium">CEO-CoCEO</span><span class="text-xs text-slate-500">4 Mei 2024</span></div>
+                            <h3 class="text-lg font-bold text-slate-900 mb-2 group-hover:text-yellow-600 transition-colors flex-grow">Rapat Pleno I</h3>
+                            <p class="text-sm text-slate-600 mb-4">Rapat pleno untuk membahas perkembangan dan evaluasi program kerja, dimana setiap departemen menyampaikan laporan kegiatan dan rencana tindak lanjut.</p>
+                            <a href="#" class="mt-auto font-semibold text-sm text-yellow-600 w-fit">Lihat Detail →</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <nav class="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0 mt-20 pt-8">
+                <div class="flex w-0 flex-1">
+                    <a href="#" class="inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
+                        <svg class="mr-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>
+                        Sebelumnya
+                    </a>
+                </div>
+                <div class="hidden md:flex">
+                    <a href="#" class="inline-flex items-center border-t-2 border-indigo-500 px-4 pt-4 text-sm font-medium text-indigo-600" aria-current="page">1</a>
+                    <a href="#" class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">2</a>
+                    <a href="#" class="inline-flex items-center border-t-2 border-transparent px-4 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">3</a>
+                </div>
+                <div class="flex w-0 flex-1 justify-end">
+                    <a href="#" class="inline-flex items-center border-t-2 border-transparent pl-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">
+                        Selanjutnya
+                        <svg class="ml-3 h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" /></svg>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </main>
+    
+    <footer class="bg-gray-900 text-white mt-10 pt-16 pb-10 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+            <div class="lg:col-span-2">
+                <div class="flex items-center gap-2 mb-4">
+                    <img src="seeologo.webp" alt="SEEO Logo" class="h-10 w-10 rounded-full">
+                    <h2 class="text-xl font-bold">SEEO</h2>
+                </div>
+                <p class="text-gray-400 text-sm mb-6">Bergabunglah dengan komunitas wirausahawan muda Fakultas Teknik UNSOED untuk membangun masa depan bisnis yang lebih cerah.</p>
+            </div>
+            <div>
+                <h4 class="text-gray-200 font-semibold mb-4 text-sm uppercase tracking-wider">Tautan Cepat</h4>
+                <ul class="space-y-3 text-sm text-gray-400">
+                    <li><a href="index.html" class="hover:text-yellow-400 transition">Beranda</a></li>
+                    <li><a href="structure.html" class="hover:text-yellow-400 transition">Struktur</a></li>
+                    <li><a href="activity.html" class="hover:text-yellow-400 transition">Kegiatan</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-gray-200 font-semibold mb-4 text-sm uppercase tracking-wider">Hubungi Kami</h4>
+                <ul class="space-y-3 text-sm text-gray-400">
+                    <li><a href="mailto:info@seeo.com" class="hover:text-yellow-400 transition">info@seeo.com</a></li>
+                    <li><p>Fakultas Teknik, UNSOED</p></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 mt-12 pt-6 text-sm text-gray-500 text-center">
+            <p>&copy; 2025 Soedirman Entrepreneur Engineering. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <button @click="window.scrollTo({ top: 0, behavior: 'smooth' })" x-show="!atTop" x-transition class="fixed bottom-8 right-8 bg-indigo-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-indigo-700 transition transform hover:scale-110 z-50">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
+    </button>
+    
+    <script>
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) { entry.target.classList.add('active'); }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => { observer.observe(el); });
+    </script>
+</body>
+</html>

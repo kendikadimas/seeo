@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Soedirman Entrepreneur Engineering Organization</title> 
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    animation: {
+                        'fade-in-up': 'fadeInUp 1s ease-out',
+                        'fade-in-down': 'fadeInDown 1s ease-out 0.2s both',
+                        'pulse-slow': 'pulse 3s infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        fadeInDown: {
+                            '0%': { opacity: '0', transform: 'translateY(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-white">
+  <!-- Alpine.js-powered navbar -->
+<nav x-data="{ open: false }" class="bg-white/80 backdrop-blur-md border-b border-gray-200 shadow-sm py-4 px-6 sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    
+    <!-- Logo -->
+    <div class="flex items-center gap-2">
+      <img src="seeologo.webp" alt="SEEO Logo" class="h-10 w-10 rounded-full">
+      <span class="text-gray-900 font-semibold text-lg tracking-tight">
+        SEEO
+      </span>
+    </div>
+
+    <!-- Desktop Menu -->
+    <ul class="hidden md:flex items-center gap-6 text-sm font-medium text-gray-700">
+      <li><a href="index.html" class="hover:text-indigo-600 transition">Beranda</a></li>
+      <li><a href="department.html" class="hover:text-indigo-600 transition">Departemen</a></li>
+      <li><a href="#learn" class="hover:text-indigo-600 transition">Artikel</a></li>
+      <li><a href="#about" class="hover:text-indigo-600 transition">About</a></li>
+    </ul>
+
+    <!-- Right Side Actions -->
+    <div class="hidden md:flex items-center gap-3">
+      <a href="#login" class="text-sm text-gray-600 hover:text-indigo-600 transition">Log in</a>
+      <a
+        href="#start"
+        class="bg-indigo-600 hover:bg-indigo-700 text-white text-sm px-4 py-2 rounded-lg font-medium transition shadow"
+      >
+        Get Started
+      </a>
+    </div>
+
+    <!-- Mobile Hamburger Button -->
+    <button @click="open = !open" class="md:hidden text-gray-700 text-2xl focus:outline-none">
+      <span x-show="!open">☰</span>
+      <span x-show="open">✕</span>
+    </button>
+  </div>
+
+  <!-- Mobile Dropdown Menu -->
+  <div
+    x-show="open"
+    x-transition
+    class="md:hidden mt-4 px-4 pt-4 pb-6 border-t border-gray-200 bg-white/90 backdrop-blur-md rounded-md space-y-3 text-sm font-medium text-gray-700"
+  >
+    <a href="#features" class="block px-2 py-2 hover:bg-gray-100 rounded">Features</a>
+    <a href="#templates" class="block px-2 py-2 hover:bg-gray-100 rounded">Templates</a>
+    <a href="#learn" class="block px-2 py-2 hover:bg-gray-100 rounded">Resources</a>
+    <a href="#about" class="block px-2 py-2 hover:bg-gray-100 rounded">About</a>
+    <hr class="my-2" />
+    <a href="#login" class="block px-2 py-2 hover:bg-gray-100 rounded">Log in</a>
+    <a
+      href="#start"
+      class="block bg-indigo-600 hover:bg-indigo-700 text-white text-center px-4 py-2 rounded-lg font-medium transition"
+    >
+      Get Started
+    </a>
+  </div>
+</nav>
+<section class="bg-gradient-to-br from-white via-sky-50 to-blue-100 py-10 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <h2 class="text-4xl font-extrabold text-black mb-4">Departemen SEEO</h2>
+      <!-- <p class="text-blue-700 text-lg max-w-xl mx-auto">Every feature is crafted to empower designers, developers, and marketers to build faster, look better, and deliver smarter.</p> -->
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
+    
+    <div class="relative w-full max-w-lg h-60 rounded-3xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300" 
+         style="background-image: url('assets/ceoco.JPG'); background-size: cover; background-position: center;">
+        <div class="absolute -top-5 left-6 text-4xl bg-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg">
+            👑
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-full p-6 flex flex-col justify-end bg-gradient-to-t from-black/50 via-black/40 to-transparent">
+            <h3 class="text-white font-bold text-3xl drop-shadow-lg">CEO & Co-CEO</h3>
+        </div>
+    </div>
+
+    <div class="relative w-full max-w-lg h-60 rounded-3xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300" 
+         style="background-image: url('assets/finance.JPG'); background-size: cover; background-position: center;">
+        <div class="absolute -top-5 left-6 text-4xl bg-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg">
+            💰
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-full p-6 flex flex-col justify-end bg-gradient-to-t from-black/50 via-black/40 to-transparent">
+            <h3 class="text-white font-bold text-3xl drop-shadow-lg">Financial</h3>
+        </div>
+    </div>
+
+    <div class="relative w-full max-w-lg h-60 rounded-3xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300" 
+         style="background-image: url('assets/opet.JPG'); background-size: cover; background-position: center;">
+        <div class="absolute -top-5 left-6 text-4xl bg-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg">
+            💼
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-full p-6 flex flex-col justify-end bg-gradient-to-t from-black/50 via-black/40 to-transparent">
+            <h3 class="text-white font-bold text-3xl drop-shadow-lg">Operating</h3>
+        </div>
+    </div>
+
+    <div class="relative w-full max-w-lg h-60 rounded-3xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300" 
+         style="background-image: url('assets/admin.JPG'); background-size: cover; background-position: center;">
+        <div class="absolute -top-5 left-6 text-4xl bg-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg">
+            📝
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-full p-6 flex flex-col justify-end bg-gradient-to-t from-black/50 via-black/40 to-transparent">
+            <h3 class="text-white font-bold text-3xl drop-shadow-lg">Administration</h3>
+        </div>
+    </div>
+
+    <div class="relative w-full max-w-lg h-60 rounded-3xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300" 
+         style="background-image: url('assets/prod.JPG'); background-size: cover; background-position: center;">
+        <div class="absolute -top-5 left-6 text-4xl bg-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg">
+            👨‍🍳
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-full p-6 flex flex-col justify-end bg-gradient-to-t from-black/50 via-black/40 to-transparent">
+            <h3 class="text-white font-bold text-3xl drop-shadow-lg">Production</h3>
+        </div>
+    </div>
+    <a href="marketing.html">
+    <div class="relative w-full max-w-lg h-60 rounded-3xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300" 
+         style="background-image: url('assets/mm.JPG'); background-size: cover; background-position: center;">
+        <div class="absolute -top-5 left-6 text-4xl bg-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg">
+            💻
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-full p-6 flex flex-col justify-end bg-gradient-to-t from-black/50 via-black/40 to-transparent">
+            <h3 class="text-white font-bold text-3xl drop-shadow-lg">Marketing Medinfo</h3>
+        </div>
+    </div>
+    </a>
+
+    <div class="relative w-full max-w-lg h-60 rounded-3xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300" 
+         style="background-image: url('assets/ssd.JPG'); background-size: cover; background-position: center;">
+        <div class="absolute -top-5 left-6 text-4xl bg-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg">
+            📈
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-full p-6 flex flex-col justify-end bg-gradient-to-t from-black/50 via-black/40 to-transparent">
+            <h3 class="text-white font-bold text-3xl drop-shadow-lg">Sales Distribution</h3>
+        </div>
+    </div>
+
+    <div class="relative w-full max-w-lg h-60 rounded-3xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300" 
+         style="background-image: url('assets/pr.JPG'); background-size: cover; background-position: center;">
+        <div class="absolute -top-5 left-6 text-4xl bg-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg">
+            📱
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-full p-6 flex flex-col justify-end bg-gradient-to-t from-black/50 via-black/40 to-transparent">
+            <h3 class="text-white font-bold text-3xl drop-shadow-lg">Public Relation</h3>
+        </div>
+    </div>
+
+    <div class="relative w-full max-w-lg h-60 rounded-3xl overflow-hidden transform hover:-translate-y-2 transition-all duration-300" 
+         style="background-image: url('assets/hr.JPG'); background-size: cover; background-position: center;">
+        <div class="absolute -top-5 left-6 text-4xl bg-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg">
+            👥
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-full p-6 flex flex-col justify-end bg-gradient-to-t from-black/50 via-black/40 to-transparent">
+            <h3 class="text-white font-bold text-3xl drop-shadow-lg">Human Resources</h3>
+        </div>
+    </div>
+    
+</div>
+</section>
+
+        </body>
+      </html>
+
