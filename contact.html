@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hubungi Kami - Soedirman Entrepreneur Engineering</title> 
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { 'sans': ['Poppins', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        .reveal { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease-out, transform 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body class="bg-slate-50" x-data="{ atTop: true }" @scroll.window="atTop = (window.scrollY < 50)">
+
+   <nav x-data="{ open: false }" 
+     :class="{ 'bg-white/80 backdrop-blur-md shadow-sm': !atTop, 'bg-transparent text-white': atTop }"
+     class="py-4 px-6 fixed top-0 w-full z-50 transition-all duration-300">
+  <div class="max-w-7xl mx-auto flex items-center justify-between">
+    <div class="flex items-center gap-2">
+        <img src="seeologo.webp" alt="SEEO Logo" class="h-10 w-10 rounded-full">
+        <span :class="{ 'text-gray-900': !atTop, 'text-white': atTop }" class="font-semibold text-lg tracking-tight transition-colors">SEEO</span>
+    </div>
+    <ul class="hidden md:flex items-center gap-6 text-sm font-bold">
+      <li><a href="index.html" :class="{ 'text-gray-700': !atTop, 'text-white': atTop }" class="hover:text-indigo-500 transition-colors">Beranda</a></li>
+      <li><a href="structure.html" :class="{ 'text-gray-700': !atTop, 'text-white': atTop }" class="hover:text-indigo-500 transition-colors">Struktur</a></li>
+      <li><a href="activity.html" :class="{ 'text-gray-700': !atTop, 'text-white': atTop }" class="hover:text-indigo-500 transition-colors">Kegiatan</a></li>
+      <li><a href="contact.html" class="text-indigo-500 transition-colors">Kontak</a></li>
+    </ul>
+    <div class="hidden md:flex items-center">
+      <a href="https://www.blaterianseeo.my.id/shop/home" target="_blank" class="bg-yellow-500 hover:bg-yellow-600 text-white text-sm px-6 py-3 rounded-lg font-bold transition shadow-lg hover:shadow-yellow-500/30">
+        Blaterian
+      </a>
+    </div>
+    <button @click="open = !open" class="md:hidden text-2xl focus:outline-none" :class="{ 'text-gray-700': !atTop, 'text-white': atTop }">
+      <span x-show="!open">☰</span>
+      <span x-show="open">✕</span>
+    </button>
+  </div>
+  <div x-show="open" x-transition class="md:hidden mt-4 p-4 border-t border-gray-200 bg-white/95 backdrop-blur-md rounded-lg space-y-3 text-sm font-medium text-gray-700">
+    <a href="index.html" class="block px-3 py-2 hover:bg-gray-100 rounded">Beranda</a>
+    <a href="structure.html" class="block px-3 py-2 hover:bg-gray-100 rounded">Struktur</a>
+    <a href="activity.html" class="block px-3 py-2 hover:bg-gray-100 rounded">Kegiatan</a>
+    <a href="contact.html" class="block px-3 py-2 bg-gray-100 text-indigo-600 font-semibold rounded">Kontak</a>
+    <hr class="my-2" />
+    <a href="https://www.blaterianseeo.my.id/shop/home" target="_blank" class="block bg-yellow-500 hover:bg-yellow-600 text-white text-center px-4 py-2 rounded-lg font-medium transition">Blaterian</a>
+  </div>
+</nav>
+
+    <main>
+        <section class="relative bg-gradient-to-br from-gray-900 via-slate-800 to-black text-white pt-48 pb-24 px-6 text-center">
+            <div class="relative z-10">
+                <h1 class="text-4xl sm:text-6xl font-black mb-4">Hubungi Kami</h1>
+                <p class="text-lg text-white/80 max-w-3xl mx-auto">Kami siap mendengar dari Anda. Kirimkan pertanyaan, saran, atau ide kolaborasi melalui informasi di bawah ini.</p>
+            </div>
+        </section>
+
+        <section class="py-20 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                    
+                    <div class="reveal bg-white p-8 md:p-10 rounded-2xl shadow-xl">
+                        <h2 class="text-3xl font-bold text-slate-900 mb-2">Kirim Pesan</h2>
+                        <p class="text-slate-600 mb-8">Isi formulir di bawah ini dan tim kami akan segera merespons.</p>
+                        
+                        <form action="#" method="POST" class="space-y-6">
+                            <div>
+                                <label for="full-name" class="block text-sm font-medium text-gray-700">Nama Lengkap</label>
+                                <div class="mt-1">
+                                    <input type="text" name="full-name" id="full-name" autocomplete="name" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3" placeholder="John Doe">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium text-gray-700">Alamat Email</label>
+                                <div class="mt-1">
+                                    <input type="email" name="email" id="email" autocomplete="email" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3" placeholder="anda@email.com">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="subject" class="block text-sm font-medium text-gray-700">Subjek</label>
+                                <div class="mt-1">
+                                    <input type="text" name="subject" id="subject" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3" placeholder="Penawaran Kolaborasi">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="message" class="block text-sm font-medium text-gray-700">Pesan</label>
+                                <div class="mt-1">
+                                    <textarea id="message" name="message" rows="4" class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm p-3" placeholder="Tulis pesan Anda di sini..."></textarea>
+                                </div>
+                            </div>
+                            <div>
+                                <button type="submit" class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-lg text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all transform hover:scale-105">
+                                    Kirim Pesan
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="reveal" style="transition-delay: 0.2s;">
+                        <h2 class="text-3xl font-bold text-slate-900 mb-6">Informasi Kontak</h2>
+                        <ul class="space-y-6 text-slate-600">
+                            <li class="flex items-start space-x-4">
+                                <div class="flex-shrink-0 w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800">Alamat</h4>
+                                    <p>Fakultas Teknik, Universitas Jenderal Soedirman</p>
+                                    <p>Jl. Mayjend Sungkono KM 5, Blater, Purbalingga, Jawa Tengah</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start space-x-4">
+                                <div class="flex-shrink-0 w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800">Email</h4>
+                                    <a href="mailto:kontak@seeo.com" class="hover:text-indigo-600">kontak@seeo.com</a>
+                                </div>
+                            </li>
+                             <li class="flex items-start space-x-4">
+                                <div class="flex-shrink-0 w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                                                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                                            </svg>                                
+                                    </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800">Media Sosial</h4>
+                                    <a href="#" class="hover:text-indigo-600">@seeounsoed</a>
+                                </div>
+                            </li>
+                             <li class="flex items-start space-x-4">
+                                <div class="flex-shrink-0 w-10 h-10 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center">
+                                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-6 h-6">
+                                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.52.149-.174.198-.298.297-.497.099-.198.05-.371-.025-.52s-.67-.816-.926-1.109c-.252-.292-.5-.322-.699-.328-.194-.004-.412-.004-.627-.004-.214 0-.55.075-.824.372s-1.016.976-1.016 2.387c0 1.413 1.04 2.778 1.187 2.976.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.888 9.884zm6.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.204-1.654a11.882 11.882 0 005.683 1.448h.005c6.542 0 11.875-5.335 11.879-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                                            </svg>                                
+                                        </div>
+                                <div>
+                                    <h4 class="font-bold text-slate-800">Whatsapp</h4>
+                                    <a href="#" class="hover:text-indigo-600">0812-3456-789</a>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="mt-10 h-80 w-full rounded-2xl overflow-hidden shadow-lg">
+                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3956.3296291661723!2d109.33375907476214!3d-7.428726992581939!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6559814ade5b79%3A0xaef1b7bab5cba0f0!2sFakultas%20Teknik%20Universitas%20Jenderal%20Soedirman!5e0!3m2!1sid!2sid!4v1751278106018!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-20 bg-slate-100 px-4 sm:px-6 lg:px-8">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center mb-12 reveal">
+                    <h2 class="text-3xl font-bold text-slate-900">Pertanyaan yang Sering Diajukan</h2>
+                    <p class="mt-2 text-slate-600">Temukan jawaban cepat untuk pertanyaan umum tentang organisasi kami.</p>
+                </div>
+                <div class="space-y-4 reveal">
+                    <div x-data="{ open: false }" class="bg-white rounded-lg shadow-md">
+                        <button @click="open = !open" class="flex items-center justify-between w-full px-6 py-4 text-left">
+                            <span class="font-semibold text-slate-800">Bagaimana cara bergabung dengan SEEO?</span>
+                            <span x-show="!open" class="text-indigo-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg></span>
+                            <span x-show="open" class="text-indigo-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6"></path></svg></span>
+                        </button>
+                        <div x-show="open" x-transition class="px-6 pb-4 text-slate-600">
+                            <p>Kami membuka pendaftaran anggota baru (Open Recruitment) setiap awal periode kepengurusan, biasanya di awal semester ganjil. Pantau terus media sosial kami untuk informasi terbaru!</p>
+                        </div>
+                    </div>
+                    <div x-data="{ open: false }" class="bg-white rounded-lg shadow-md">
+                        <button @click="open = !open" class="flex items-center justify-between w-full px-6 py-4 text-left">
+                            <span class="font-semibold text-slate-800">Apa saja keuntungan menjadi anggota?</span>
+                            <span x-show="!open" class="text-indigo-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg></span>
+                            <span x-show="open" class="text-indigo-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6"></path></svg></span>
+                        </button>
+                        <div x-show="open" x-transition class="px-6 pb-4 text-slate-600">
+                            <p>Anggota akan mendapatkan pengalaman organisasi, pelatihan kewirausahaan eksklusif, kesempatan untuk mempraktikkan bisnis melalui brand Blaterian, serta membangun jaringan luas dengan para praktisi dan pengusaha.</p>
+                        </div>
+                    </div>
+                    <div x-data="{ open: false }" class="bg-white rounded-lg shadow-md">
+                        <button @click="open = !open" class="flex items-center justify-between w-full px-6 py-4 text-left">
+                            <span class="font-semibold text-slate-800">Apakah saya bisa mengajukan proposal kerja sama atau sponsorship?</span>
+                            <span x-show="!open" class="text-indigo-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg></span>
+                            <span x-show="open" class="text-indigo-600"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 12H6"></path></svg></span>
+                        </button>
+                        <div x-show="open" x-transition class="px-6 pb-4 text-slate-600">
+                            <p>Tentu saja! Kami sangat terbuka untuk berbagai bentuk kolaborasi dan sponsorship yang saling menguntungkan. Silakan hubungi kami melalui email yang tertera atau kirim pesan melalui formulir di halaman ini untuk diskusi lebih lanjut.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="bg-gray-900 text-white pt-16 pb-10 px-6">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-12">
+            <div class="lg:col-span-2"><div class="flex items-center gap-2 mb-4"><img src="seeologo.webp" alt="SEEO Logo" class="h-10 w-10 rounded-full"><h2 class="text-xl font-bold">SEEO</h2></div><p class="text-gray-400 text-sm mb-6">Bergabunglah dengan komunitas wirausahawan muda Fakultas Teknik UNSOED untuk membangun masa depan bisnis yang lebih cerah.</p></div>
+            <div><h4 class="text-gray-200 font-semibold mb-4 text-sm uppercase tracking-wider">Tautan Cepat</h4><ul class="space-y-3 text-sm text-gray-400"><li><a href="index.html" class="hover:text-yellow-400 transition">Beranda</a></li><li><a href="structure.html" class="hover:text-yellow-400 transition">Struktur</a></li><li><a href="activity.html" class="hover:text-yellow-400 transition">Kegiatan</a></li><li><a href="contact.html" class="hover:text-yellow-400 transition">Kontak</a></li></ul></div>
+            <div><h4 class="text-gray-200 font-semibold mb-4 text-sm uppercase tracking-wider">Hubungi Kami</h4><ul class="space-y-3 text-sm text-gray-400"><li><a href="mailto:info@seeo.com" class="hover:text-yellow-400 transition">info@seeo.com</a></li><li><p>Fakultas Teknik, UNSOED</p></li></ul></div>
+        </div>
+        <div class="border-t border-gray-800 mt-12 pt-6 text-sm text-gray-500 text-center"><p>&copy; 2025 Soedirman Entrepreneur Engineering. All rights reserved.</p></div>
+    </footer>
+    
+    <button @click="window.scrollTo({ top: 0, behavior: 'smooth' })" x-show="!atTop" x-transition class="fixed bottom-8 right-8 bg-indigo-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg hover:bg-indigo-700 transition transform hover:scale-110 z-50">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
+    </button>
+    
+    <script>
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) { entry.target.classList.add('active'); }
+            });
+        }, { threshold: 0.1 });
+        revealElements.forEach(el => { observer.observe(el); });
+    </script>
+</body>
+</html>
